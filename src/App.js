@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapPage from './MapPage.js';
+import axios from 'axios'
 
 class App extends Component {
   render() {
