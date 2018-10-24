@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js'
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 class MapPage extends Component {
   initMap = () => {
@@ -20,7 +20,7 @@ class MapPage extends Component {
     return (
       <div id="map" className="map-container">
           {/* Initialize map here*/}
-       </div>
+      </div>
     );
   }
 }
