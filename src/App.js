@@ -4,6 +4,9 @@ import MapPage from './MapPage.js';
 import axios from 'axios'
 
 class App extends Component {
+  state = {
+      venues: []
+  }
 
   getVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
@@ -17,7 +20,9 @@ class App extends Component {
 
   axios.get(endPoint + new URLSearchParams(parameters))
     .then(response => {
-      console.log(response)
+      this.setState({
+        venues: response.data.response.groups[0].items
+      })
     })
     .catch(error => {
       console.log(`An error occurred: ${error}`)
