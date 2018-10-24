@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapPage from './MapPage.js';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import axios from 'axios'
 
 class App extends Component {
   state = {
-      venues: []
+      venues: [],
+      color: "blue",
+      markerProps: {
+        color: "blue",
+        className: "my-markers"
+      }
   }
 
   getVenues = () => {
@@ -29,15 +35,36 @@ class App extends Component {
     })
   }
 
+  initMap = () => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWVybmVzdCIsImEiOiJjamtjbGR0MHIybGRrM3dwMmdnNWk1cnNsIn0.d7eL4cynPRQ2t7TETKh3yw';
+    this.map = new mapboxgl.Map({
+     container: 'map',
+     style: 'mapbox://styles/mapbox/streets-v10',
+     center: [14.5061463, 46.0513639],
+     zoom: 13
+   });
+  }
+
+  createMarkers = () => {
+        this.marker = new mapboxgl.Marker({color: this.props.color})
+        .setLngLat([14.5061463, 46.0513639])
+        .addTo(this.map)
+  }
+
   componentDidMount() {
         this.getVenues()
-    }
+  }
 
   render() {
     return (
       <div className="App">
         <main>
-          <MapPage />
+          <MapPage
+            color={this.state.color}
+            venues={this.state.venues}
+            initMap={this.initMap}
+            createMarkers={this.createMarkers}
+          />
         </main>
       </div>
     );
