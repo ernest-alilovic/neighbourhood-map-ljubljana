@@ -52,7 +52,7 @@ class App extends Component {
   createMarkers = () => {
     this.state.venues
     .map(myVenue => {
-      this.marker = new mapboxgl.Marker(this.state.markerProperties)
+      return this.marker = new mapboxgl.Marker(this.state.markerProperties)
       .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
       .addTo(this.map);
     })
