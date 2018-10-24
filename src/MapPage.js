@@ -5,7 +5,6 @@ class MapPage extends Component {
 
   componentDidMount() {
     this.props.initMap()
-    this.props.createMarkers()
   }
 
   render() {

@@ -43,12 +43,19 @@ class App extends Component {
      center: [14.5061463, 46.0513639],
      zoom: 13
    });
+
+   this.map.on('load', () => {
+     this.createMarkers();
+   })
   }
 
   createMarkers = () => {
-        this.marker = new mapboxgl.Marker({color: this.props.color})
-        .setLngLat([14.5061463, 46.0513639])
-        .addTo(this.map)
+    this.state.venues
+    .map(myVenue => {
+      this.marker = new mapboxgl.Marker(this.state.markerProperties)
+      .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
+      .addTo(this.map);
+    })
   }
 
   componentDidMount() {
