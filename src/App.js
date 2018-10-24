@@ -28,7 +28,8 @@ class App extends Component {
     .then(response => {
       this.setState({
         venues: response.data.response.groups[0].items
-      })
+      }, this.initMap())
+      console.log(this.state.venues)
     })
     .catch(error => {
       console.log(`An error occurred: ${error}`)
@@ -51,10 +52,10 @@ class App extends Component {
 
   createMarkers = () => {
     this.state.venues
-    .map(myVenue => {
-      return this.marker = new mapboxgl.Marker(this.state.markerProperties)
-      .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
-      .addTo(this.map);
+      .map(myVenue => {
+        return this.marker = new mapboxgl.Marker(this.state.markerProperties)
+        .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
+        .addTo(this.map);
     })
   }
 
