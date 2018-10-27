@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MapPage from './MapPage.js';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import Sidebar from './Sidebar';
 import axios from 'axios'
 
 class App extends Component {
@@ -69,12 +70,17 @@ class App extends Component {
     return (
       <div className="App">
         <main>
-          <MapPage
-            color={this.state.color}
-            venues={this.state.venues}
-            initMap={this.initMap}
-            createMarkers={this.createMarkers}
-          />
+          <aside id="sidebar">
+            <Sidebar />
+          </aside>
+          <section>
+            <MapPage
+              color={this.state.color}
+              venues={this.state.venues}
+              initMap={this.initMap}
+              createMarkers={this.createMarkers}
+            />
+          </section>  
         </main>
       </div>
     );
