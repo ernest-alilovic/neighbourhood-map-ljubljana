@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 class MapPage extends Component {
 
   componentDidMount() {
-    //this.props.createMarkers()
-    //this.props.initMap()
+    this.props.initMap()
   }
 
   render() {

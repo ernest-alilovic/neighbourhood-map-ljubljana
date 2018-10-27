@@ -28,8 +28,7 @@ class App extends Component {
     .then(response => {
       this.setState({
         venues: response.data.response.groups[0].items
-      }, this.initMap())
-      console.log(this.state.venues)
+      })
     })
     .catch(error => {
       console.log(`An error occurred: ${error}`)
@@ -44,6 +43,7 @@ class App extends Component {
      center: [14.5061463, 46.0513639],
      zoom: 13
    });
+   window.map = this.map;
 
    this.map.on('load', () => {
      this.createMarkers();
@@ -61,6 +61,8 @@ class App extends Component {
 
   componentDidMount() {
         this.getVenues()
+        this.initMap()
+        this.createMarkers()
   }
 
   render() {
