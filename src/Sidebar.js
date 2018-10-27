@@ -16,7 +16,7 @@ class Sidebar extends Component {
                     data-index={myVenue.venue.id}
                     className={`button ${myVenue.venue.name}`}
                   >
-                    &#128270;
+                    <span role="img" aria-label="search-button">&#128270;</span>
                   </button>
                 </li>
               ))
