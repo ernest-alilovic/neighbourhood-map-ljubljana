@@ -9,7 +9,7 @@ class Sidebar extends Component {
             this.props.venues
               .map((myVenue) =>(
                 <li key={myVenue.venue.id}>
-                  {myVenue.venue.name}
+                  {myVenue.venue.name + ` `}
                   <button
                     type="button"
                     key={myVenue.venue.id}
