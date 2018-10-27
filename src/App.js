@@ -69,9 +69,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <main>
+        <main className="container">
           <aside id="sidebar">
-            <Sidebar />
+            <Sidebar
+              venues={this.state.venues}
+            />
           </aside>
           <section>
             <MapPage
@@ -80,7 +82,7 @@ class App extends Component {
               initMap={this.initMap}
               createMarkers={this.createMarkers}
             />
-          </section>  
+          </section>
         </main>
       </div>
     );

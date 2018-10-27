@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 11pt;
 }
 
  #map {
@@ -9,9 +10,17 @@ body {
   top: 0%;
   bottom: 0;
   width: 100vw;
+  margin-left: 25%;
 }
 
 .mapboxgl-marker:hover {
   opacity: 0.7;
   cursor: pointer;
+  flex-direction: row;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
