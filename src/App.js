@@ -12,7 +12,8 @@ class App extends Component {
       markerProps: {
         color: "blue",
         className: "my-markers"
-      }
+      },
+      markers: []
   }
 
   getVenues = () => {
@@ -54,10 +55,11 @@ class App extends Component {
   createMarkers = () => {
     this.state.venues
       .map(myVenue => {
-        return this.marker = new mapboxgl.Marker(this.state.markerProperties)
+        let marker = new mapboxgl.Marker(this.state.markerProperties)
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
         .addTo(this.map);
-    })
+        return this.state.markers.push(marker)
+    }, console.log(this.state.markers));
   }
 
   componentDidMount() {
