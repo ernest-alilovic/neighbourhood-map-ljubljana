@@ -3,6 +3,8 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 11pt;
+  display: flex;
+  flex-flow: column wrap;
 }
 
  #map {
@@ -10,16 +12,25 @@ body {
   top: 0%;
   bottom: 0;
   width: 100vw;
-  margin-left: 25%;
+  margin-left: 15%
 }
 
 .mapboxgl-marker:hover {
   opacity: 0.7;
   cursor: pointer;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .container {
   display: flex;
+}
+
+#sidebar {
+  width: 15%;
+  height: 100vw;
+  background-color: grey;
+  display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
 }

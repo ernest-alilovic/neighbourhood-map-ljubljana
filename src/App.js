@@ -42,7 +42,7 @@ class App extends Component {
      container: 'map',
      style: 'mapbox://styles/mapbox/streets-v10',
      center: [14.5061463, 46.0513639],
-     zoom: 14
+     zoom: 13
    });
    window.map = this.map;
 
