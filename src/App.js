@@ -102,6 +102,8 @@ class App extends Component {
                       this.props.activateMarker
                   }*/
               this.props.activateMarker()
+          } else {
+            markersArray[i].getPopup()._onClickClose();
           }
       }
   }

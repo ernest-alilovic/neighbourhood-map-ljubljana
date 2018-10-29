@@ -37,3 +37,16 @@ body {
   flex-direction: column;
   overflow: auto;
 }
+
+.search-bar {
+  position: relative;
+  margin: 10px;
+  height: 10px;
+  width: 70%;
+  padding: 10px 10px 10px 30px;
+  font-size: 1em;
+}
+
+.button {
+  margin-left: 15px;
+}

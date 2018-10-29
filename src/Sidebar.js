@@ -4,7 +4,14 @@ class Sidebar extends Component {
   render() {
     return (
       <div id="map-sidebar">
-        <ul className="location-list">
+      <div id="search-field">
+          <input
+              className='search-bar'
+              type='text'
+              placeholder='Search locations'
+          />
+        </div>
+        <ul className="locations-list">
           {
             this.props.venues
               .map((myVenue) =>(
