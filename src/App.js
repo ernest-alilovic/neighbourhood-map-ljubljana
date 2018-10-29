@@ -49,17 +49,29 @@ class App extends Component {
 
    this.map.on('load', () => {
      this.createMarkers();
+     this.createPopups();
    })
+  }
+
+  createPopups = () => {
+
   }
 
   createMarkers = () => {
     this.state.venues
       .map(myVenue => {
+        const popup = new mapboxgl.Popup({offset: 40, className: 'my-class'})
+          .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
+          .setHTML(
+            `<h1>${myVenue.venue.name}</h1>
+            <p>${myVenue.venue.location.formattedAddress}</p>`
+          )
         let marker = new mapboxgl.Marker(this.state.markerProperties)
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
         .addTo(this.map);
         return this.state.markers.push(marker)
     }, console.log(this.state.markers));
+    this.createPopups()
   }
 
   componentDidMount() {
