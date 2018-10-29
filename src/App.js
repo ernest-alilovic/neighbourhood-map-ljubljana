@@ -13,7 +13,7 @@ class App extends Component {
         className: "my-markers"
       },
       markers: [],
-      id: []
+      activeMarker: null
   }
 
   getVenues = () => {
@@ -56,16 +56,16 @@ class App extends Component {
     this.state.venues
       .map(myVenue => {
         const popup = new mapboxgl.Popup({
-          offset: 40, className: 'my-class'
+          offset: 40, className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
         })
           .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
           .setHTML(
             `<h1>${myVenue.venue.name}</h1>
             <p>${myVenue.venue.location.formattedAddress}</p>`
           )
-          console.log(myVenue.venue.id)
-          /*let index = this.state.markers.length
-          this.state.id.push(index)*/
+        //console.log(myVenue.venue.id)
+        //console.log(this.state.markers.length)
+        //console.log(this.state.id)
         let marker = new mapboxgl.Marker({
           color: this.state.markerProps.color,
           className: myVenue.venue.id
@@ -77,21 +77,34 @@ class App extends Component {
     }, console.log(this.state.markers));
   }
 
+  activateMarker = () => {
+      this.setState({
+          isActiveMarker: true,
+          markerProperties: {color: "crimson"}
+      })
+      console.log(this.state.activeMarker)
+      console.log(this.state.markerProps)
+  }
+
   handleClick(e) {
       e.preventDefault();
-      console.log(this)
-        console.log(this.props.markers)
-        console.log(this.props.markers.indexOf(this.props.markers[29]))
-        console.log(this.props.foursquareVenues)
-        console.log(e.target)
-        console.log(e.target.className)
-        //this.props.foursquareVenues.indexOf(e.target.dataset.index)
-        /*console.log(e.target);
-        const index = e.target.dataset.index;
-        console.log(e.target.dataset.index);
-        this.state.locations[index-1].marker.togglePopup()
-        console.log(this.state.locations[index-1].marker);*/
-    }
+      console.log(e.target.className)
+      console.log(e.target)
+      let markersArray = this.props.markers
+        for (let i = 0; i < markersArray.length; i++) {
+          if (this.props.markers[i].getPopup().options.className === e.target.className) {
+              console.log("You did it! You are a genius!");
+              const activeMarker = this.props.markers[i]
+              activeMarker.togglePopup()
+                  /*if (this.props.markers[i] === activeMarker) {
+                      activeMarker.togglePopup()
+                      console.log(`Active Marker: ${this.props.isActiveMarker}`)
+                      this.props.activateMarker
+                  }*/
+              this.props.activateMarker()
+          }
+      }
+  }
 
   componentDidMount() {
         this.getVenues()
@@ -114,6 +127,7 @@ class App extends Component {
               venues={this.state.venues}
               initMap={this.initMap}
               createMarkers={this.createMarkers}
+              activateMarker={this.activateMarker}
             />
           </section>
         </main>
