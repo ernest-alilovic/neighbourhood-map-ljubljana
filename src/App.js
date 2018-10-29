@@ -4,16 +4,22 @@ import MapPage from './MapPage.js';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import Sidebar from './Sidebar';
 import axios from 'axios'
+import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
   state = {
       venues: [],
       markerProps: {
-        color: "crimson",
-        className: "my-markers"
+        color: "crimson"
       },
       markers: [],
-      activeMarker: null
+      activeMarker: null,
+      query: '',
+      displayedMarkers: []
+  }
+
+  componentDidMount() {
+        this.getVenues()
   }
 
   getVenues = () => {
@@ -21,7 +27,7 @@ class App extends Component {
     const parameters = {
       client_id: "LBUCBJIQ2WGFMXELGJSAGKFN5ULLVMOSW2YNYAJIERFYBUVL",
       client_secret: "TVQ20TZSFGB03F3VFH20BBJJEP2KRNCZCLP0CNREHXONIQOH",
-      query: "sights",
+      query: "Top Picks",
       near: "Ljubljana",
       v: 20182507
   }
@@ -49,67 +55,75 @@ class App extends Component {
 
    this.map.on('load', () => {
      this.createMarkers();
+     this.map.addControl(new mapboxgl.NavigationControl());
    })
   }
 
   createMarkers = () => {
-    this.state.venues
+    const allMarkers = this.state.venues
       .map(myVenue => {
         const popup = new mapboxgl.Popup({
-          offset: 40, className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
+          offset: 25,
+          className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
         })
           .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
           .setHTML(
-            `<h1>${myVenue.venue.name}</h1>
-            <p>${myVenue.venue.location.formattedAddress}</p>`
+            `<h3>${myVenue.venue.name}</h3>
+            <p>${myVenue.venue.categories[0].name}</p>`
           )
-        //console.log(myVenue.venue.id)
-        //console.log(this.state.markers.length)
-        //console.log(this.state.id)
         let marker = new mapboxgl.Marker({
           color: this.state.markerProps.color,
-          className: myVenue.venue.id
+          className: myVenue.venue.name
         })
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
         .setPopup(popup)
-        .addTo(this.map);
-        return this.state.markers.push(marker)
-    }, console.log(this.state.markers));
+        .addTo(this.map)
+        marker.getElement().data = myVenue.venue.name;
+        marker.getElement().addEventListener('click', this.activateMarker)
+        return marker;
+    })
+   this.setState({ markers: allMarkers, displayedMarkers: allMarkers });
   }
 
-  activateMarker = () => {
-      this.setState({
-          isActiveMarker: true,
-          markerProperties: {color: "crimson"}
-      })
-      console.log(this.state.activeMarker)
-      console.log(this.state.markerProps)
+  activateMarker = (e) => {
+    e.preventDefault();
   }
 
   handleClick(e) {
       e.preventDefault();
-      console.log(e.target.className)
-      console.log(e.target)
-      let markersArray = this.props.markers
+      let markersArray = this.props.displayedMarkers
         for (let i = 0; i < markersArray.length; i++) {
-          if (this.props.markers[i].getPopup().options.className === e.target.className) {
-              console.log("You did it! You are a genius!");
-              const activeMarker = this.props.markers[i]
+          if (this.props.markers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
+              const activeMarker = this.props.displayedMarkers[i]
               activeMarker.togglePopup()
-                  /*if (this.props.markers[i] === activeMarker) {
-                      activeMarker.togglePopup()
-                      console.log(`Active Marker: ${this.props.isActiveMarker}`)
-                      this.props.activateMarker
-                  }*/
-              this.props.activateMarker()
           } else {
             markersArray[i].getPopup()._onClickClose();
           }
       }
   }
 
-  componentDidMount() {
-        this.getVenues()
+  updateQuery = (query) => {
+    this.setState({ query: query })
+    this.updateMarkers(query);
+  }
+
+  updateMarkers = (query) => {
+      let displayedMarkers = this.state.markers;
+
+      if (query) {
+          const match = new RegExp(escapeRegExp(query.toLowerCase(), 'i'))
+          displayedMarkers = this.state.markers.filter((myMarker) => {
+              return match.test(
+                  myMarker.getElement().data.toLowerCase()
+              )
+            }
+          )
+          this.setState({
+              displayedMarkers: displayedMarkers
+          })
+      } else {
+          this.setState({ displayedMarkers: this.state.markers })
+      }
   }
 
   render() {
@@ -121,15 +135,24 @@ class App extends Component {
               venues={this.state.venues}
               handleClick={this.handleClick}
               markers={this.state.markers}
+              activateMarker={this.activateMarker}
+              query={this.state.query}
+              updateQuery={this.updateQuery}
+              displayedMarkers={this.state.displayedMarkers}
             />
           </aside>
           <section>
             <MapPage
-              color={this.state.color}
               venues={this.state.venues}
               initMap={this.initMap}
               createMarkers={this.createMarkers}
               activateMarker={this.activateMarker}
+              query={this.state.query}
+              updateQuery={this.updateQuery}
+              markers={this.state.markers}
+              updateMarkers={this.updateMarkers}
+              displayedMarkers={this.state.displayedMarkers}
+              mapElement={this.map}
             />
           </section>
         </main>

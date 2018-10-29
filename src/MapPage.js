@@ -6,9 +6,17 @@ class MapPage extends Component {
     this.props.initMap()
   }
 
+  displayMarkers = () => {
+      this.props.markers.forEach(marker => marker.remove());
+      this.props.displayedMarkers.forEach(marker => {
+          marker.addTo(this.props.mapElement)
+      })
+  }
+
   render() {
+    this.displayMarkers();
     return (
-      <div id="map" className="map-container">
+      <div id="map" className="map-container" role="application" tabIndex="0">
           {/* Initialize map here*/}
       </div>
     );
