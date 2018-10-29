@@ -14,7 +14,8 @@ class Sidebar extends Component {
                     type="button"
                     key={myVenue.venue.id}
                     data-index={myVenue.venue.id}
-                    className={`button ${myVenue.venue.name}`}
+                    className={`button ${myVenue.venue.name} ${myVenue.venue.id}`}
+                    onClick={this.props.handleClick.bind(this)}
                   >
                     <span role="img" aria-label="search-button">&#128270;</span>
                   </button>

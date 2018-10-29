@@ -55,20 +55,23 @@ class App extends Component {
   createMarkers = () => {
     this.state.venues
       .map(myVenue => {
-        const popup = new mapboxgl.Popup({offset: 40, className: 'my-class'})
+        const popup = new mapboxgl.Popup({
+          offset: 40, className: 'my-class'
+        })
           .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
           .setHTML(
             `<h1>${myVenue.venue.name}</h1>
             <p>${myVenue.venue.location.formattedAddress}</p>`
           )
-          let index = this.state.markers.length
-          this.state.id.push(index)
+          console.log(myVenue.venue.id)
+          /*let index = this.state.markers.length
+          this.state.id.push(index)*/
         let marker = new mapboxgl.Marker({
           color: this.state.markerProps.color,
-          className: this.state.markerProps.className,
-          index: this.state.id
+          className: myVenue.venue.id
         })
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
+        .setPopup(popup)
         .addTo(this.map);
         return this.state.markers.push(marker)
     }, console.log(this.state.markers));
@@ -76,18 +79,22 @@ class App extends Component {
 
   handleClick(e) {
       e.preventDefault();
-      console.log(this.props)
-      /*console.log(e.target);
-      const index = e.target.dataset.index;
-      console.log(e.target.dataset.index);
-      this.state.locations[index-1].marker.togglePopup()
-      console.log(this.state.locations[index-1].marker);*/
+      console.log(this)
+        console.log(this.props.markers)
+        console.log(this.props.markers.indexOf(this.props.markers[29]))
+        console.log(this.props.foursquareVenues)
+        console.log(e.target)
+        console.log(e.target.className)
+        //this.props.foursquareVenues.indexOf(e.target.dataset.index)
+        /*console.log(e.target);
+        const index = e.target.dataset.index;
+        console.log(e.target.dataset.index);
+        this.state.locations[index-1].marker.togglePopup()
+        console.log(this.state.locations[index-1].marker);*/
     }
 
   componentDidMount() {
         this.getVenues()
-        this.initMap()
-        this.createMarkers()
   }
 
   render() {
@@ -97,7 +104,7 @@ class App extends Component {
           <aside id="sidebar">
             <Sidebar
               venues={this.state.venues}
-              hansleClick={this.handleClick}
+              handleClick={this.handleClick}
               markers={this.state.markers}
             />
           </aside>
