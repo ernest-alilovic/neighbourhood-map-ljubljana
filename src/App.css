@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Coda', cursive, Helvetica, Arial, sans-serif;
   font-size: 11pt;
   display: flex;
   flex-flow: column wrap;
