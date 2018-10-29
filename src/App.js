@@ -8,12 +8,12 @@ import axios from 'axios'
 class App extends Component {
   state = {
       venues: [],
-      color: "blue",
       markerProps: {
-        color: "blue",
+        color: "crimson",
         className: "my-markers"
       },
-      markers: []
+      markers: [],
+      id: []
   }
 
   getVenues = () => {
@@ -49,12 +49,7 @@ class App extends Component {
 
    this.map.on('load', () => {
      this.createMarkers();
-     this.createPopups();
    })
-  }
-
-  createPopups = () => {
-
   }
 
   createMarkers = () => {
@@ -66,13 +61,28 @@ class App extends Component {
             `<h1>${myVenue.venue.name}</h1>
             <p>${myVenue.venue.location.formattedAddress}</p>`
           )
-        let marker = new mapboxgl.Marker(this.state.markerProperties)
+          let index = this.state.markers.length
+          this.state.id.push(index)
+        let marker = new mapboxgl.Marker({
+          color: this.state.markerProps.color,
+          className: this.state.markerProps.className,
+          index: this.state.id
+        })
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
         .addTo(this.map);
         return this.state.markers.push(marker)
     }, console.log(this.state.markers));
-    this.createPopups()
   }
+
+  handleClick(e) {
+      e.preventDefault();
+      console.log(this.props)
+      /*console.log(e.target);
+      const index = e.target.dataset.index;
+      console.log(e.target.dataset.index);
+      this.state.locations[index-1].marker.togglePopup()
+      console.log(this.state.locations[index-1].marker);*/
+    }
 
   componentDidMount() {
         this.getVenues()
@@ -87,6 +97,8 @@ class App extends Component {
           <aside id="sidebar">
             <Sidebar
               venues={this.state.venues}
+              hansleClick={this.handleClick}
+              markers={this.state.markers}
             />
           </aside>
           <section>
