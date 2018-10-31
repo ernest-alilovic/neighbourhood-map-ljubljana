@@ -21,20 +21,22 @@ class Sidebar extends Component {
 
     return (
       <div id="map-sidebar">
-      <div id="search-field">
-          <input
-              className='search-bar'
-              type='text'
-              placeholder='Search locations'
-              value={this.state.query}
-              onChange={(event) => this.props.updateQuery(event.target.value)}
-          />
-        </div>
+        <div id="search-field">
+          <h3 className="venues-ljubljana" tabIndex="0">Places to see in Ljubljana, Slovenia</h3>
+              <input
+                  className='search-bar'
+                  type='text'
+                  placeholder='Search locations'
+                  aria-label='Search locations'
+                  value={this.state.query}
+                  onChange={(event) => this.props.updateQuery(event.target.value)}
+              />
+          </div>
         <ul className="locations-list">
           {
             displayedLocations
               .map((myVenue) => (
-                <li 
+                <li
                   key={myVenue.venue.id}
                   className="location-list-item"
                 >
@@ -51,6 +53,7 @@ class Sidebar extends Component {
                 </li>
               ))
           }
+          <p className="credits">This project is powered by Mapbox and Foursquare.</p>
         </ul>
       </div>
     );

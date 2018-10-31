@@ -16,8 +16,11 @@ class MapPage extends Component {
   render() {
     this.displayMarkers();
     return (
-      <div id="map" className="map-container" role="application" tabIndex="0">
-          {/* Initialize map here*/}
+      <div
+        id="map"
+        className="map-container"
+        role="application"
+        tabIndex="0">
       </div>
     );
   }

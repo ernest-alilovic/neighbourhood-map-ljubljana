@@ -19,10 +19,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-        this.getVenues()
+        this.fetchVenues()
   }
 
-  getVenues = () => {
+  fetchVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
       client_id: "LBUCBJIQ2WGFMXELGJSAGKFN5ULLVMOSW2YNYAJIERFYBUVL",
@@ -63,7 +63,7 @@ class App extends Component {
     const allMarkers = this.state.venues
       .map(myVenue => {
         const popup = new mapboxgl.Popup({
-          offset: 25,
+          offset: 35,
           className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
         })
           .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
@@ -93,11 +93,12 @@ class App extends Component {
       e.preventDefault();
       let markersArray = this.props.displayedMarkers
         for (let i = 0; i < markersArray.length; i++) {
+          this.props.displayedMarkers[i].getPopup()
           if (this.props.markers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
               const activeMarker = this.props.displayedMarkers[i]
               activeMarker.togglePopup()
           } else {
-            markersArray[i].getPopup()._onClickClose();
+            this.props.displayedMarkers[i].getPopup()._onClickClose();
           }
       }
   }
