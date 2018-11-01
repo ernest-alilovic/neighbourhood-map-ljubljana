@@ -3,8 +3,8 @@ import './App.css';
 import MapPage from './MapPage.js';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import Sidebar from './Sidebar';
-import axios from 'axios'
-import escapeRegExp from 'escape-string-regexp'
+import axios from 'axios';
+import escapeRegExp from 'escape-string-regexp';
 
 class App extends Component {
   state = {
@@ -18,10 +18,8 @@ class App extends Component {
       displayedMarkers: []
   }
 
-  componentDidMount() {
-        this.fetchVenues()
-  }
-
+/* fetches venues from Foursquare using Axios
+I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
   fetchVenues = () => {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?"
     const parameters = {
@@ -43,6 +41,7 @@ class App extends Component {
     })
   }
 
+/* initialises map */
   initMap = () => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWVybmVzdCIsImEiOiJjamtjbGR0MHIybGRrM3dwMmdnNWk1cnNsIn0.d7eL4cynPRQ2t7TETKh3yw';
     this.map = new mapboxgl.Map({
@@ -52,24 +51,26 @@ class App extends Component {
      zoom: 13
    });
    window.map = this.map;
-
+/* creates markers upon map initialisation */
    this.map.on('load', () => {
      this.createMarkers();
-     this.map.addControl(new mapboxgl.NavigationControl());
    })
   }
 
+/* creates markers */
   createMarkers = () => {
     const allMarkers = this.state.venues
       .map(myVenue => {
+/* creates popups and sets their content*/
         const popup = new mapboxgl.Popup({
-          offset: 35,
+          offset: 25,
           className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
         })
           .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
           .setHTML(
             `<h3>${myVenue.venue.name}</h3>
-            <p>${myVenue.venue.categories[0].name}</p>`
+            <p>${myVenue.venue.categories[0].name}</p>
+            <p>${myVenue.venue.location.formattedAddress[0]}</p>`
           )
         let marker = new mapboxgl.Marker({
           color: this.state.markerProps.color,
@@ -79,14 +80,18 @@ class App extends Component {
         .setPopup(popup)
         .addTo(this.map)
         marker.getElement().data = myVenue.venue.name;
+        marker.getElement().classList.add("animated")
         marker.getElement().addEventListener('click', this.activateMarker)
         return marker;
     })
    this.setState({ markers: allMarkers, displayedMarkers: allMarkers });
   }
 
+/* ensures that when a marker is clicked, it flashes, its popup appears
+and disappears when another marker is clicked */
   activateMarker = (e) => {
     e.preventDefault();
+    e.currentTarget.classList.toggle("flash")
   }
 
   handleClick(e) {
@@ -96,11 +101,16 @@ class App extends Component {
           this.props.displayedMarkers[i].getPopup()
           if (this.props.markers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
               const activeMarker = this.props.displayedMarkers[i]
+              activeMarker.getElement().classList.toggle("flash")
               activeMarker.togglePopup()
           } else {
             this.props.displayedMarkers[i].getPopup()._onClickClose();
           }
       }
+  }
+
+  componentDidMount() {
+        this.fetchVenues()
   }
 
   updateQuery = (query) => {

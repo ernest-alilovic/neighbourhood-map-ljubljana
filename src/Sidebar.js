@@ -38,7 +38,7 @@ class Sidebar extends Component {
               .map((myVenue) => (
                 <li
                   key={myVenue.venue.id}
-                  className="location-list-item"
+                  className="location-item"
                 >
                   {myVenue.venue.name + ` `}
                   <button
@@ -48,7 +48,7 @@ class Sidebar extends Component {
                     className="sidebar-button"
                     onClick={this.props.handleClick.bind(this)}
                   >
-                    <span role="img" aria-label="search-button">&#128270;</span>
+                    <span role="img" aria-label="search-location">&#128270;</span>
                   </button>
                 </li>
               ))
