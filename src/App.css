@@ -41,7 +41,6 @@ body {
   width: 20%;
   height: 100%;
   background-color: rgb(245, 245, 245);
-  box-shadow: 5px 5px 5px grey;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -68,7 +67,7 @@ body {
 
 .location-item {
   list-style: none outside;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .search-locations {

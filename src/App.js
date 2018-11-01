@@ -25,7 +25,7 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
     const parameters = {
       client_id: "LBUCBJIQ2WGFMXELGJSAGKFN5ULLVMOSW2YNYAJIERFYBUVL",
       client_secret: "TVQ20TZSFGB03F3VFH20BBJJEP2KRNCZCLP0CNREHXONIQOH",
-      query: "Top Picks",
+      query: "top",
       near: "Ljubljana",
       v: 20182507
   }
@@ -87,19 +87,18 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
    this.setState({ markers: allMarkers, displayedMarkers: allMarkers });
   }
 
-/* ensures that when a marker is clicked, it flashes, its popup appears
-and disappears when another marker is clicked */
   activateMarker = (e) => {
     e.preventDefault();
     e.currentTarget.classList.toggle("flash")
   }
-
+/* ensures click on button/marker toggles the popup of location linked
+to button/marker */
   handleClick(e) {
-      e.preventDefault();
+    e.preventDefault();
       let markersArray = this.props.displayedMarkers
         for (let i = 0; i < markersArray.length; i++) {
           this.props.displayedMarkers[i].getPopup()
-          if (this.props.markers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
+          if (this.props.displayedMarkers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
               const activeMarker = this.props.displayedMarkers[i]
               activeMarker.getElement().classList.toggle("flash")
               activeMarker.togglePopup()
@@ -113,6 +112,7 @@ and disappears when another marker is clicked */
         this.fetchVenues()
   }
 
+/* search logic */
   updateQuery = (query) => {
     this.setState({ query: query })
     this.updateMarkers(query);
