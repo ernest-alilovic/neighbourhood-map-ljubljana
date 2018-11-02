@@ -18,6 +18,10 @@ class App extends Component {
       displayedMarkers: []
   }
 
+  componentDidMount() {
+    this.fetchVenues()
+  }
+
 /* fetches venues from Foursquare using Axios
 I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
   fetchVenues = () => {
@@ -93,6 +97,7 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
   }
 /* ensures click on button/marker toggles the popup of location linked
 to button/marker */
+
   handleClick(e) {
     e.preventDefault();
       let markersArray = this.props.displayedMarkers
@@ -106,10 +111,6 @@ to button/marker */
             this.props.displayedMarkers[i].getPopup()._onClickClose();
           }
       }
-  }
-
-  componentDidMount() {
-        this.fetchVenues()
   }
 
 /* search logic */
@@ -154,8 +155,9 @@ to button/marker */
           </aside>
           <section>
             <MapPage
-              venues={this.state.venues}
               initMap={this.initMap}
+              mapElement={this.map}
+              venues={this.state.venues}
               createMarkers={this.createMarkers}
               activateMarker={this.activateMarker}
               query={this.state.query}
@@ -163,7 +165,6 @@ to button/marker */
               markers={this.state.markers}
               updateMarkers={this.updateMarkers}
               displayedMarkers={this.state.displayedMarkers}
-              mapElement={this.map}
             />
           </section>
         </main>
