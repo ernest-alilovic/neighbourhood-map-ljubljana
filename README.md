@@ -6,7 +6,7 @@ Download the project to your device:
 
 * as a zip-file, extract it and cd into the project directory.
 OR
-* by cloning the repository: ```git clone https://github.com/DanielaKuester/Udacity-Project07-MyReadsApp/```
+* by cloning the repository: ```https://github.com/ernest-alilovic/neighbourhood-map-ljubljana.git```
 
 THEN
 1. install the project dependencies with `npm install`
