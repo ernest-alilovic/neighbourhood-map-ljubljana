@@ -14,7 +14,9 @@ THEN
 3. the app should open automatically in your browser (if it doesn't, open `localhost:3000` in your browser)
 
 ## How the App Works
-Once the app is up and running, a map should be displayed along with a sidebar containing a list of Ljubljana's top venues, accoridng to Foursquare. Markers showing the location of each venue are displayed on the map. When you click on a marker, a pop-up appears, containing a short description of the venue and its address. To search for a specific venue, simply type in part of any venue's name and it will filter out all irrelevant locations. Clicking buttons next to each location listing will also make the venue's pop-up appear. Enjoy!
+Once the app is up and running, a map should be displayed along with a sidebar containing a list of Ljubljana's top venues, according to Foursquare. 
+Markers showing the location of each venue are also displayed on the map. When you click on a marker, a pop-up appears, containing a short description of the venue and its address. 
+To search for a specific venue, simply type in part of any venue's name and it will filter out all irrelevant locations. Clicking the button next to each location listing will also make the venue's pop-up appear. Enjoy!
 
 ## Dependencies
 * The map is provided by [Mapbox-GL-JS API](https://www.mapbox.com/mapbox-gl-js/api)
