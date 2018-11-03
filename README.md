@@ -4,7 +4,7 @@ A project I created for my Udacity Front-End Nanodegree - an interactive map of 
 ## How to Get Started
 Download the project to your device:
 
-* as a zip-file, extract it and cd into the project directory.
+* as a zip-file, extract it and cd into the project directory
 OR
 * by cloning the repository: ```https://github.com/ernest-alilovic/neighbourhood-map-ljubljana.git```
 
