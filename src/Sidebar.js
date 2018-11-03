@@ -22,7 +22,7 @@ class Sidebar extends Component {
     return (
       <div id="map-sidebar">
         <div id="search-field">
-          <h3 className="venues-ljubljana" tabIndex="0">Places to see in Ljubljana, Slovenia</h3>
+          <h3 className="venues-ljubljana" tabIndex="0">Welcome to Ljubljana, Slovenia!</h3>
               <input
                   className='search-bar'
                   type='text'

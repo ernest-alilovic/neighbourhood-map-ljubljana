@@ -66,7 +66,7 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
     const allMarkers = this.state.venues
       .map(myVenue => {
 /* creates popups and sets their content*/
-        const popup = new mapboxgl.Popup({
+        const infoWindow = new mapboxgl.Popup({
           offset: 25,
           className: `${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`
         })
@@ -81,7 +81,7 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
           className: myVenue.venue.name
         })
         .setLngLat([myVenue.venue.location.lng, myVenue.venue.location.lat])
-        .setPopup(popup)
+        .setPopup(infoWindow)
         .addTo(this.map)
         marker.getElement().data = myVenue.venue.name;
         marker.getElement().classList.add("animated")
@@ -95,6 +95,7 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
     e.preventDefault();
     e.currentTarget.classList.toggle("flash")
   }
+
 /* ensures click on button/marker toggles the popup of location linked
 to button/marker */
 
