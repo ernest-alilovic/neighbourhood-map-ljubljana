@@ -25,10 +25,10 @@ To search for a specific venue, simply type in part of any venue's name and it w
 ## Credits
 * [Udacity's study material](https://classroom.udacity.com/nanodegrees/nd001/parts/c3e7b0d6-ffef-4421-b5fc-6df10fd0a1ae) helped me understand React. I used some code from Udacity's material and from previous projects, mostly in the search field functionality.
 * [Yayha Elharony's YouTube tutorials](https://www.youtube.com/watch?v=ywdxLNjhBYw&list=PLgOB68PvvmWCGNn8UMTpcfQEiITzxEEA1) helped me set up my project's basic functionalities, like displaying the map, fetching data from Foursquare and displaying dynamic markers.
-* [The Mapbox documentation](https://www.mapbox.com/documentation/) with its many tutorials helped me understand how to use Mapbox and implement its many features into my app to my advantage.
-* Udacity's amazing mentors and coaches for helping me when I was stuck.
+* [Mapbox documentation](https://www.mapbox.com/documentation/) with its many tutorials helped me understand how to use Mapbox and implement its many features into my app to my advantage.
+* [Foursquare documentation](https://developer.foursquare.com/docs) also helped me understand how to use its Places API to put Ljubljana's top venues on the map (pun intended).
+* Udacity's amazing mentors and coaches for helping me when I was stuck and couldn't find the right solution. I still have a lot to learn.
 
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
