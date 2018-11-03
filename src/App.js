@@ -104,6 +104,8 @@ to button/marker */
       const markersArray = this.state.displayedMarkers;
       const currentCoordStr = currentCoord.join(",");
       let markerPopup;
+/* loops through all markers checking if the clicked button matches
+any of them; if it does, then highlight the marker, otherwise close it */
         for (let i = 0; i < markersArray.length; i++) {
           markerPopup = this.state.displayedMarkers[i].getPopup();
           if (markerPopup.options.className === currentCoordStr) {
