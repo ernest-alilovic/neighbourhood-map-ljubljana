@@ -1,5 +1,5 @@
 # Neighborhood Map
-A project I created for my Udacity Front-End Nanodegree - an interactive map of my hometown Ljubljana, Slovenia, made with React and powered by Mapbox and Foursquare.
+A project I created for my Udacity Front-End Nanodegree - an interactive map of my hometown Ljubljana, Slovenia, made with React and powered by Mapbox and Foursquare API.
 
 ## How to Get Started
 Download the project to your device:
