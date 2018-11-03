@@ -46,7 +46,12 @@ class Sidebar extends Component {
                     key={myVenue.venue.id}
                     data-buttoncoord={`${[myVenue.venue.location.lng, myVenue.venue.location.lat]}`}
                     className="sidebar-button"
-                    onClick={this.props.handleClick.bind(this)}
+                    onClick={e =>
+                      this.props.handleClick(e, [
+                        myVenue.venue.location.lng,
+                        myVenue.venue.location.lat
+                      ])
+                    }
                   >
                     <span role="img" aria-label="search-location">&#128270;</span>
                   </button>

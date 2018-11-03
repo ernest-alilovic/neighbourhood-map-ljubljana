@@ -98,20 +98,22 @@ I followed a YouTube tutorial mentioned in my ReadMe to achieve this */
 /* ensures click on button/marker toggles the popup of location linked
 to button/marker */
 
-  handleClick(e) {
+  handleClick = (e, currentCoord) => {
     e.preventDefault();
-      let markersArray = this.props.displayedMarkers
+      const markersArray = this.state.displayedMarkers;
+      const currentCoordStr = currentCoord.join(",");
+      let markerPopup;
         for (let i = 0; i < markersArray.length; i++) {
-          this.props.displayedMarkers[i].getPopup()
-          if (this.props.displayedMarkers[i].getPopup().options.className === e.target.dataset.buttoncoord) {
-              const activeMarker = this.props.displayedMarkers[i]
-              activeMarker.getElement().classList.toggle("flash")
-              activeMarker.togglePopup()
+          markerPopup = this.state.displayedMarkers[i].getPopup();
+          if (markerPopup.options.className === currentCoordStr) {
+            const activeMarker = this.state.displayedMarkers[i];
+            activeMarker.getElement().classList.toggle("flash");
+            activeMarker.togglePopup();
           } else {
-            this.props.displayedMarkers[i].getPopup()._onClickClose();
+            markerPopup._onClickClose();
           }
-      }
-  }
+        }
+      };
 
 /* search logic */
   updateQuery = (query) => {
